@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_1/main.dart';
+import 'package:instagram_1/post_list.dart';
 
 // TODO: edit profile, Fetch Posts, Liked, Saved
 
@@ -11,20 +13,31 @@ class UserProfile extends StatefulWidget {
   State createState() => UserProfileState(uid);
 }
 
+//GlobalKey g_PostLikedSavedGlobalKey = GlobalKey();
+
 class UserProfileState extends State<UserProfile> {
   final String uid;
 
   UserProfileState(this.uid);
 
-  Widget _PostLikedSaved() {
+  double _getSizeOfTabs() {
+    final RenderBox bottomNavBar = g_bottomNavigationBarKey.currentContext.findRenderObject();
+    final sizeNav = bottomNavBar.size;
+
+//    final RenderBox tabs = g_PostLikedSavedGlobalKey.currentContext.findRenderObject();
+//    final position = tabs.localToGlobal(Offset.zero);
+    return MediaQuery.of(context).size.height - sizeNav.height - 201.2;
+  }
+
+  Widget _postLikedSaved() {
     TabController tabController =
         TabController(length: 3, vsync: AnimatedListState(), initialIndex: 0);
     return Container(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+//        key: g_PostLikedSavedGlobalKey ,
         children: <Widget>[
           TabBar(
+//            isScrollable: true,
             controller: tabController,
             tabs: <Widget>[
               Tab(
@@ -55,14 +68,10 @@ class UserProfileState extends State<UserProfile> {
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
-            height: 40.0,
+            height: _getSizeOfTabs(),
             child: TabBarView(
               controller: tabController,
-              children: <Widget>[
-                Text("Put Post here"),
-                Text("Put Likes here"),
-                Text("Put Saved here")
-              ],
+              children: <Widget>[PostList(), PostList(), PostList()],
             ),
           ),
         ],
@@ -82,7 +91,10 @@ class UserProfileState extends State<UserProfile> {
               CircleAvatar(
                 radius: 32,
               ), // Avatar
-              Expanded(child: Text("")), // Padding
+              Expanded(
+                  child: Container(
+                height: 0,
+              )), // Padding
               GestureDetector(
                   // Followers
                   onTap: () {
@@ -113,7 +125,7 @@ class UserProfileState extends State<UserProfile> {
         margin: const EdgeInsets.all(16),
         child: Text("Some Name", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
       ),
-      _PostLikedSaved()
+      _postLikedSaved()
     ])));
   }
 }

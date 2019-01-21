@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Post extends StatefulWidget {
   final String postId;
@@ -25,10 +26,12 @@ class _PostState extends State<Post> {
       debugPrint("[IMPLMNT] toggle like state");
     });
   }
+
   void _showSenderProfile() {
     // TODO: show a scaffold
     debugPrint("[IMPLMNT] show senderProfile");
   }
+
   void _showComments() {
     // TODO: a list of comments warped in a scaffold
     debugPrint("[IMPLMNT] show Comments for the Post");
@@ -44,21 +47,29 @@ class _PostState extends State<Post> {
             size: 28,
           )),
       GestureDetector(
-        onTap: _showComments,
-          child:Container(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Icon(
-            Icons.comment,
-            color: Colors.black54,
-            size: 28,
-          ))),
+          onTap: _showComments,
+          child: Container(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Icon(
+                Icons.comment,
+                color: Colors.black54,
+                size: 28,
+              ))),
       Container(
           padding: const EdgeInsets.only(left: 16.0),
           child: Icon(
             Icons.send,
             color: Colors.black54,
             size: 28,
-          ))
+          )),
+      Expanded(
+          child: Container(
+        height: 0,
+      )),
+      Text(
+        "${DateFormat("d MMMM y").format(DateTime.now())}",
+        style: TextStyle(fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic),
+      )
     ]);
   }
 
@@ -69,19 +80,19 @@ class _PostState extends State<Post> {
           padding: const EdgeInsets.only(top: 4.0, left: 4.0, bottom: 2),
           margin: EdgeInsets.all(4),
           child: GestureDetector(
-            onTap: _showSenderProfile,
-              child:Row(children: [
-            CircleAvatar(),
-            Container(
-                padding: const EdgeInsets.only(left: 4),
-                child: Text("Dude", style: TextStyle(fontWeight: FontWeight.bold)))
-          ]))),
+              onTap: _showSenderProfile,
+              child: Row(children: [
+                CircleAvatar(),
+                Container(
+                    padding: const EdgeInsets.only(left: 4),
+                    child: Text("Dude", style: TextStyle(fontWeight: FontWeight.bold)))
+              ]))),
       Divider(
         height: 0,
         color: Colors.black38,
       ),
       GestureDetector(
-          onDoubleTap: (){
+          onDoubleTap: () {
             setState(() {
               _isLiked = true;
             });

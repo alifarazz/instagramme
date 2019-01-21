@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:instagram_1/feed.dart';
 import 'package:instagram_1/post_list.dart';
 import 'package:instagram_1/user_profile.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+GlobalKey g_bottomNavigationBarKey = GlobalKey();
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -71,22 +74,23 @@ class _MyHomePageState extends State<MyHomePage> {
         onPageChanged: _onPageChanged,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        key: g_bottomNavigationBarKey,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.home, color: (_page == 0) ? Colors.white : Colors.grey),
-              title: Container(height: 0),
+              title: Text("Feed"),
               backgroundColor: Colors.black),
           BottomNavigationBarItem(
               icon: Icon(Icons.search, color: (_page == 1) ? Colors.white : Colors.grey),
-              title: Container(height: 0),
+              title: Text("Global"),
               backgroundColor: Colors.black),
           BottomNavigationBarItem(
               icon: Icon(Icons.history, color: (_page == 2) ? Colors.white : Colors.grey),
-              title: Container(height: 0),
+              title: Text("Recent"),
               backgroundColor: Colors.black),
           BottomNavigationBarItem(
               icon: Icon(Icons.person, color: (_page == 3) ? Colors.white : Colors.grey),
-              title: Container(height: 0),
+              title: Text("Profile"),
               backgroundColor: Colors.black)
         ],
         onTap: _onNavigationBarTapped,
@@ -103,5 +107,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onNavigationBarTapped(int page) {
     pageController.jumpToPage(page);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
+  @override
+  dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 }
