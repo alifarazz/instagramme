@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:instagram_1/Pages/login_page.dart';
+import 'package:instagram_1/main.dart';
+import 'package:instagram_1/Pages/home_page.dart';
 
 class SignUpPage extends StatefulWidget {
 	static String tag = 'signup-page';
@@ -66,7 +68,8 @@ class _SignUpPageState extends State<SignUpPage> {
 					borderRadius: BorderRadius.circular(24),
 				),
 				onPressed: () {
-					Navigator.of(context).pushNamed(LoginPage.tag);
+					Navigator.pop(context);
+//					Navigator.of(context).pushReplacementNamed (HomePage.tag);
 				},
 				padding: EdgeInsets.all(12),
 				color: Colors.lightBlueAccent,

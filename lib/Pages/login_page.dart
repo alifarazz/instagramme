@@ -4,19 +4,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:instagram_1/main.dart';
 import 'package:instagram_1/Pages/sign_up_page.dart';
+import 'package:instagram_1/shared_prefs.dart';
 import 'package:instagram_1/Pages/home_page.dart';
 
-
-class LoginPage extends StatefulWidget{
-
+class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
   static String user = 'q';
   static String pass = '1';
+
   @override
   State createState() => _LoginPageState();
 }
+
 class _LoginPageState extends State<LoginPage> {
-  var _prefs = SharedPreferences.getInstance();
+  BuildContext _scaffoldContext;
+
+  var usernameText = TextEditingController();
+  var passText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +33,14 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-//		Future<Null> _setUID() async {
-//			final SharedPreferences prefs = await _prefs;
-//			//set uid
-//			MyApp.loginUID = '1';
-//			prefs.setString('uid', '1');
-//
-//			setState(() {
-//				_counter = prefs.setInt("counter", counter).then((bool success) {
-//					return counter;
-//				});
-//			});
-//		}
+    void _wrongUserPassSnackbar() {
+      Scaffold.of(_scaffoldContext).showSnackBar(SnackBar(
+          duration: Duration(milliseconds: 1200),
+          backgroundColor: Colors.blueGrey,
+          content: Text("Wrong username or password")));
+    }
 
-    final usernameText = TextEditingController();
-    final passText = TextEditingController();
-
-    final username = TextFormField(
+    var username = TextFormField(
       //keyboardType: TextInputType.emailAddress,
       autofocus: false,
       controller: usernameText,
@@ -57,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final password = TextFormField(
+    var password = TextFormField(
       autofocus: false,
       controller: passText,
       //initialValue: 'some password',
@@ -79,13 +74,14 @@ class _LoginPageState extends State<LoginPage> {
           if (username.controller.text == LoginPage.user &&
               password.controller.text == LoginPage.pass) {
             // update  uid in prefs
-            _prefs.then((prefs) {
+            MySharedPrefs.prefs.then((prefs) {
               prefs.setString("uid", "1");
             });
-            Navigator.of(context).dispose(); // remove LoginPage
-            Navigator.of(context).pushNamed(HomePage.tag); // push HomePage
-//            Scaffold.of(context).showSnackBar(SnackBar(duration: Duration(milliseconds: 500),content: Text("Login Successful!")));
-          }
+//            Navigator.of(context).dispose(); // remove LoginPage
+            Navigator.of(context).pushReplacementNamed(HomePage.tag);
+//            Navigator.of(context).pushNamed(HomePage.tag); // push HomePage
+          } else
+            _wrongUserPassSnackbar();
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
@@ -129,20 +125,33 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {},
     );
 
+    var body = Padding(
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(bottom: 40),
+              child: logo,
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: username,
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: password,
+            ),
+            buttonBox,
+            forgotLabel
+          ],
+        ));
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.blue[50],
-      body: Padding(padding: EdgeInsets.only(left: 24.0, right: 24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding (padding: EdgeInsets.only(bottom: 40),child:logo,),
-          Padding (padding: EdgeInsets.only(bottom: 8.0),child:username,),
-          Padding (padding: EdgeInsets.only(bottom: 8.0),child:password,),
-          buttonBox,
-          forgotLabel
-        ],
-      )),
-    );
+        resizeToAvoidBottomPadding: false,
+        backgroundColor: Colors.blue[50],
+        body: Builder(builder: (BuildContext context) {
+          _scaffoldContext = context;
+          return body;
+        }));
   }
 }

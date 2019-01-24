@@ -11,6 +11,7 @@ import 'package:instagram_1/user_profile.dart';
 import 'package:instagram_1/Pages/login_page.dart';
 import 'package:instagram_1/Pages/sign_up_page.dart';
 import 'package:instagram_1/Pages/home_page.dart';
+import 'package:instagram_1/shared_prefs.dart';
 
 void main() => runApp(MyApp());
 
@@ -58,10 +59,8 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
   Future<String> _getLoginUID() async {
-    return (await SharedPreferences.getInstance()).getString('uid');
+    return (await MySharedPrefs.prefs).getString('uid');
   }
 
   @override
