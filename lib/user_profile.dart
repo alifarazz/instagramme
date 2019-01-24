@@ -12,15 +12,15 @@ class UserProfile extends StatefulWidget {
   UserProfile(this.uid);
 
   @override
-  State createState() => UserProfileState(uid);
+  State createState() => _UserProfileState(uid);
 }
 
 //GlobalKey g_PostLikedSavedGlobalKey = GlobalKey();
 
-class UserProfileState extends State<UserProfile> with SingleTickerProviderStateMixin {
+class _UserProfileState extends State<UserProfile> with SingleTickerProviderStateMixin {
   final String uid;
 
-  UserProfileState(this.uid);
+  _UserProfileState(this.uid);
 
 //  Widget _postLikedSaved() {
 //    return Container(
