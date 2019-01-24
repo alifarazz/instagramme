@@ -37,16 +37,24 @@ class _PostState extends State<Post> {
     debugPrint("[IMPLMNT] show Comments for the Post");
   }
 
+  void _showLikers() {
+    // TODO: a list of users which have liked this post
+    debugPrint("[IMPLMNT] show Likers of post");
+  }
+
   Widget likeCommentMsgSection() {
     return Row(children: <Widget>[
       GestureDetector(
+          /* Like */
           onTap: _toggleLike,
+          onLongPress: _showLikers,
           child: Icon(
             (_isLiked) ? Icons.favorite : Icons.favorite_border,
             color: (!_isLiked) ? Colors.black : Colors.red,
             size: 28,
           )),
       GestureDetector(
+          /* Comment */
           onTap: _showComments,
           child: Container(
               padding: const EdgeInsets.only(left: 16.0),
@@ -56,6 +64,7 @@ class _PostState extends State<Post> {
                 size: 28,
               ))),
       Container(
+          /* Message */
           padding: const EdgeInsets.only(left: 16.0),
           child: Icon(
             Icons.send,
@@ -67,6 +76,7 @@ class _PostState extends State<Post> {
         height: 0,
       )),
       Text(
+        /* Post date */
         "${DateFormat("d MMMM y").format(DateTime.now())}",
         style: TextStyle(fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic),
       )
