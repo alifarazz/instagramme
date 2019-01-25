@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:instagram_1/Pages/login_page.dart';
+import 'package:instagram_1/pages/login_page.dart';
 import 'package:instagram_1/main.dart';
-import 'package:instagram_1/Pages/home_page.dart';
+import 'package:instagram_1/pages/home_page.dart';
 
 class SignUpPage extends StatefulWidget {
 	static String tag = 'signup-page';
@@ -12,6 +12,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+	var usernameController = TextEditingController();
+	var passwordController = TextEditingController();
+	var biographyController = TextEditingController();
+
 	@override
 	Widget build(BuildContext context) {
 //
@@ -33,9 +37,9 @@ class _SignUpPageState extends State<SignUpPage> {
 		final username = TextFormField(
 			//keyboardType: TextInputType.emailAddress,
 			autofocus: false,
-			initialValue: 'Vito',
+			controller: usernameController,
 			decoration: InputDecoration(
-				hintText: 'username',
+				hintText: 'Username',
 				contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
 				border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
 			),
@@ -43,7 +47,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
 		final password = TextFormField(
 			autofocus: false,
-			initialValue: '1234',
+			controller: passwordController,
 			obscureText: true,
 			decoration: InputDecoration(
 				hintText: 'Password',
@@ -54,8 +58,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
 		final biography = TextFormField(
 			autofocus: false,
+			controller: biographyController,
 			decoration: InputDecoration(
-				hintText: 'biography',
+				hintText: 'Biography',
 				contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
 				border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
 			),

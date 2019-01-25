@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:instagram_1/feed.dart';
 import 'package:instagram_1/post_list.dart';
-import 'package:instagram_1/user_profile.dart';
-import 'package:instagram_1/Pages/login_page.dart';
-import 'package:instagram_1/Pages/sign_up_page.dart';
+import 'package:instagram_1/pages/user_profile.dart';
+import 'package:instagram_1/pages/login_page.dart';
+import 'package:instagram_1/pages/sign_up_page.dart';
 import 'package:instagram_1/main.dart';
 
 

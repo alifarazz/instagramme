@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:instagram_1/main.dart';
-import 'package:instagram_1/Pages/sign_up_page.dart';
+import 'package:instagram_1/pages/sign_up_page.dart';
 import 'package:instagram_1/shared_prefs.dart';
-import 'package:instagram_1/Pages/home_page.dart';
+import 'package:instagram_1/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:instagram_1/main.dart';
-import 'package:instagram_1/Pages/login_page.dart';
+import 'package:instagram_1/pages/login_page.dart';
 import 'package:instagram_1/post_list.dart';
-import 'shared_prefs.dart';
+import 'package:instagram_1/shared_prefs.dart';
+import 'package:instagram_1/pages/edit_profile.dart';
 
 // TODO: edit profile, Fetch Posts, Liked, Saved
 
@@ -153,7 +154,9 @@ class _CollapsingListState extends State<CollapsingList> {
           style: ListTileStyle.drawer,
           child: ListTile(
             title: Text("Edit Profile"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(EditProfilePage.tag);
+            },
           )),
       ListTileTheme(
           textColor: Colors.orange,
