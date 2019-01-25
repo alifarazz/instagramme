@@ -17,6 +17,7 @@ class SaveModel {
     ON UPDATE CASCADE ON DELETE CASCADE
 );''';
   }
+
   void insertDB() async {
     var dbClient = await DBHelper().db;
     await dbClient.transaction((txn) async {
@@ -26,5 +27,4 @@ class SaveModel {
   }
 
   SaveModel(this.account, this.post);
-
 }

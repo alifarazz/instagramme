@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 enum TabItem { Feed, Global, Recent, Profile }
 
 class _HomePageState extends State<StatefulWidget> {
-	final List<Widget> _children = [Feed(), Feed(), PostList(), UserProfile(MyApp.loginUID)];
+	final List<Widget> _children = [Feed(), Feed(), PostList(), UserProfile()];
 	TabItem _currentTab = TabItem.Feed;
 
 	void _selectTab(int idx) {

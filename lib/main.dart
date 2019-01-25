@@ -14,9 +14,19 @@ import 'package:instagram_1/pages/home_page.dart';
 import 'package:instagram_1/pages/edit_profile.dart';
 import 'package:instagram_1/shared_prefs.dart';
 
+import 'package:instagram_1/model/account.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+//static AccountModel accountModel;
+//
+//  static String get loginUID {
+//    if (accountModel == null)
+//      return '';
+//    return accountModel.uid;
+//  }
+
   static String loginUID;
 
   // This widget is the root of your application.
@@ -61,7 +71,7 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  Future<String> _getLoginUID() async {
+  Future<String>  _getLoginUID() async {
     return (await MySharedPrefs.prefs).getString('uid');
   }
 
@@ -78,6 +88,7 @@ class _RootPageState extends State<RootPage> {
                 return Text('Error: ${snapshot.error}');
               else {
                 MyApp.loginUID = snapshot.data;
+                debugPrint("[BUILD] uid = ${MyApp.loginUID}");
                 if (MyApp.loginUID == '1')
                   return HomePage();
                 else {

@@ -1,7 +1,8 @@
 import 'db/dbhelper.dart';
 import 'account.dart';
+
 class PostModel {
-AccountModel account;
+  AccountModel account;
   String pid;
   String photo;
   DateTime dateTime;
@@ -13,10 +14,10 @@ AccountModel account;
   "uid"     INTEGER NOT NULL,
   "photo"   VARCHAR,
   "caption" TEXT,
-  #PRIMARY KEY("pid"),
   FOREIGN KEY("uid") REFERENCES "ACCOUNT"("uid") ON UPDATE CASCADE ON DELETE CASCADE
 );''';
   }
+
   void insertDB() async {
     var dbClient = await DBHelper().db;
     await dbClient.transaction((txn) async {
@@ -25,7 +26,5 @@ AccountModel account;
     });
   }
 
-PostModel(this.account, this.pid, this.photo, this.dateTime, this.caption);
-
-
+  PostModel(this.account, this.pid, this.photo, this.dateTime, this.caption);
 }

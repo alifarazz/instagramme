@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io' as io;
 import 'package:path/path.dart';
@@ -9,6 +10,8 @@ import 'package:instagram_1/model/following.dart';
 import 'package:instagram_1/model/like.dart';
 import 'package:instagram_1/model/post.dart';
 import 'package:instagram_1/model/save.dart';
+
+import 'package:crypt/crypt.dart';
 
 class DBHelper {
   static Database _db;
@@ -34,5 +37,11 @@ class DBHelper {
       SaveModel.createQuery()
     ];
     for (var q in queries) await db.execute(q);
+
+    var am = AccountModel('1', 'q', 'joe somedude',
+        Crypt.sha256("1", salt: "abcdefghijklmnop").toString(), 'LOrem ipusms', "");
+    am.insertDB();
+
+    debugPrint("Database Created");
   }
 }
