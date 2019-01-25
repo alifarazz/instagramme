@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:instagram_1/post_list.dart';
 
 class Post extends StatefulWidget {
   final String postId;
@@ -30,16 +31,19 @@ class _PostState extends State<Post> {
   void _showSenderProfile() {
     // TODO: show a scaffold
     debugPrint("[IMPLMNT] show senderProfile");
+
   }
 
   void _showComments() {
     // TODO: a list of comments warped in a scaffold
     debugPrint("[IMPLMNT] show Comments for the Post");
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Scaffold(body:PostList())));
   }
 
   void _showLikers() {
     // TODO: a list of users which have liked this post
     debugPrint("[IMPLMNT] show Likers of post");
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Scaffold(body:PostList())));
   }
 
   Widget likeCommentMsgSection() {

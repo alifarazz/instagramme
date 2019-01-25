@@ -7,10 +7,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:instagram_1/feed.dart';
 import 'package:instagram_1/post_list.dart';
-import 'package:instagram_1/user_profile.dart';
-import 'package:instagram_1/Pages/login_page.dart';
-import 'package:instagram_1/Pages/sign_up_page.dart';
-import 'package:instagram_1/Pages/home_page.dart';
+import 'package:instagram_1/pages/user_profile.dart';
+import 'package:instagram_1/pages/login_page.dart';
+import 'package:instagram_1/pages/sign_up_page.dart';
+import 'package:instagram_1/pages/home_page.dart';
+import 'package:instagram_1/pages/edit_profile.dart';
 import 'package:instagram_1/shared_prefs.dart';
 
 void main() => runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     RootPage.tag: (context) => RootPage(),
     SignUpPage.tag: (context) => SignUpPage(),
     HomePage.tag: (context) => HomePage(),
+    EditProfilePage.tag: (context) => EditProfilePage(),
   };
 
   @override
