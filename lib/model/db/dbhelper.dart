@@ -10,6 +10,7 @@ import 'package:instagram_1/model/following.dart';
 import 'package:instagram_1/model/like.dart';
 import 'package:instagram_1/model/post.dart';
 import 'package:instagram_1/model/save.dart';
+import 'package:instagram_1/model/following.dart';
 
 import 'package:crypt/crypt.dart';
 
@@ -38,9 +39,15 @@ class DBHelper {
     ];
     for (var q in queries) await db.execute(q);
 
-    var am = AccountModel('1', 'q', 'joe somedude',
-        Crypt.sha256("1", salt: "abcdefghijklmnop").toString(), 'LOrem ipusms', "");
-    am.insertDB();
+    var q = AccountModel('1', 'q', 'joe somedude', Crypt.sha256("1", salt: "abcdefghijklmnop").toString(),
+        'LOrem ipusms', "");
+    var qq = AccountModel('2', 'qq', 'juliene', Crypt.sha256("1", salt: "abcdefghijklmnop").toString(),
+        'LOremssss ipusms', "");
+    q.insertDB();
+    qq.insertDB();
+    FollowingModel(q, qq).insertDB();
+    FollowingModel(qq, q).insertDB();
+//     am.insertDB();
 
     debugPrint("Database Created");
   }

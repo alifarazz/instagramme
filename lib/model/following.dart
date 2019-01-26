@@ -55,11 +55,11 @@ class FollowingModel {
     FROM FOLLOWING, ACCOUNT
     WHERE FOLLOWING.followee = ? and ACCOUNT.uid = ?;''', [uid, uid]);
 
-    List<AccountModel> am;
+    List<AccountModel> am = [];
     for (var q in list)
       am.add(
           AccountModel(q['uid'], q['username'], q['fullname'], q['h_pass'], q['bio'], q['avatar']));
-    debugPrint("query on $uid, get follwers: ${am.toString()}");
+    debugPrint("[MODEL] query on $uid, get follwers: ${am.toString()}");
     return am;
   }
 
@@ -70,11 +70,11 @@ class FollowingModel {
     FROM FOLLOWING, ACCOUNT
     WHERE FOLLOWING.follower = ? and ACCOUNT.uid = ?;''', [uid, uid]);
 
-    List<AccountModel> am;
+    List<AccountModel> am = [];
     for (var q in list)
       am.add(
           AccountModel(q['uid'], q['username'], q['fullname'], q['h_pass'], q['bio'], q['avatar']));
-    debugPrint("query on $uid, get follwing: ${am.toString()}");
+    debugPrint("[MODEL] query on $uid, get follwing: ${am.toString()}");
     return am;
   }
 

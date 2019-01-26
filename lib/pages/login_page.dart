@@ -70,13 +70,15 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        onPressed: () {
+        onPressed: () async {
           if (username.controller.text == LoginPage.user &&
               password.controller.text == LoginPage.pass) {
             // update  uid in prefs
-            MySharedPrefs.prefs.then((prefs) {
-              prefs.setString("uid", "1");
-            });
+//            MySharedPrefs.prefs.then((prefs) {
+//              prefs.setString("uid", "1");
+//            });
+            (await MySharedPrefs.prefs).setString('uid', '1');
+            MyApp.loginUID = '1';
 //            Navigator.of(context).dispose(); // remove LoginPage
             Navigator.of(context).pushReplacementNamed(HomePage.tag);
 //            Navigator.of(context).pushNamed(HomePage.tag); // push HomePage
